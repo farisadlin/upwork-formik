@@ -5,7 +5,7 @@ export const initialState = {
   duplicatedArrKey: [],
 };
 
-const re = /([A-Z])\w*/g;
+const re = /([a-zA-Z])\w*/g;
 
 const appReducer = (state = initialState, action) => {
   // * Filtered Only Product Code
@@ -42,11 +42,17 @@ const appReducer = (state = initialState, action) => {
     productImages: firstItem,
   }));
 
+  console.log(`remove`, removedDuplicatedArr)
+
+  console.log(`filteredProductCode`, filteredProductCode)
+
+  console.log(`fixedNewArr`, fixedNewArr)
+
   switch (action.type) {
     case appConstants.UPLOAD_PRODUCT_SUCCESS:
       return {
         ...state,
-        products: fixedNewArr,
+        products: [...state.products, ...fixedNewArr],
       };
 
     default:
